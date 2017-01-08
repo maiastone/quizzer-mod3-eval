@@ -22,6 +22,10 @@ class App extends Component {
       console.log('Error receiving quizzes')
     })
   }
+  componentDidMount() {
+    this.fetchQuizzes();
+
+  }
 
   render() {
     return (
@@ -30,7 +34,6 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Quizzer App</h2>
         </div>
-        {this.state.quizzes}
       </div>
     );
   }
