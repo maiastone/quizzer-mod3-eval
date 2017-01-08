@@ -12,11 +12,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/quizzes')
+    axios.get('https://localhost:3001/quizzes')
     .then((response) => {
       this.setState({
         quizzes: response.data.quizzes
-      })
+      });
+    })
+    .catch(function(error) {
+      console.log('Error receiving quizzes')
     })
   }
 
