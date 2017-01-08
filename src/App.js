@@ -11,8 +11,8 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('https://localhost:3001/quizzes')
+  fetchQuizzes() {
+    axios.get('/quizzes')
     .then((response) => {
       this.setState({
         quizzes: response.data.quizzes
