@@ -23,9 +23,9 @@ class App extends Component {
       console.log('Error receiving quizzes')
     })
   }
+  
   componentDidMount() {
     this.fetchQuizzes();
-
   }
 
 

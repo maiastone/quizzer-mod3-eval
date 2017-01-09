@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import App from './App.js';
-
-// const quizzes = this.props.quizzes.map(quiz => {
-//   return (
-//     <li key={quiz.id}>
-//       {quiz}
-//     </li>
-//   );
-// })}
+import Question from './Question.jsx';
 
 class Quiz extends Component {
+  constructor() {
+    super();
+  }
+
+  // {this.props.quizzes.map(quiz => {
+  //   return (
+  //     <div>
+  //       <h2>{quiz.title}</h2>
+  //       <Question
+  //         questions={quiz.questions} />
+  //     </div>
+  //   )}
+  // )}
+
 
   render() {
-    return(
-      <div>Hello</div>
-    )
+    return (
+      <div>
+        <Question />
+      </div>
+    );
   }
 
 };
 
-export default Quiz;
+module.exports = Quiz;
