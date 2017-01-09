@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import App from './App.js';
+import Answer from './Answer.jsx';
 
-const Question = (props) => {
-  const {title, id, answers } = props;
+class Question extends React.Component {
 
-    return (
-      <h1>Question</h1>
-    )
 
-}
+    render() {
+      const { question } = this.props
+      return (
+        <section>
+          <h2>{question.title}</h2>
+          <form>
+            {question.answers.map((answer, index) => {
+              return(
+                <Answer
+                  index={index}
+                  answer={answer} />
+              )
+            })}
+          </form>
+        </section>
+      );
+    }
+  }
 
 module.exports = Question;

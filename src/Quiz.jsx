@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import App from './App.js';
-import Question from './Question.jsx';
 import axios from 'axios';
+import Question from './Question.jsx';
 
 class Quiz extends Component {
   constructor() {
     super();
     this.state = {
-      quizzes: null,
+      quizzes: [],
     }
   };
 
@@ -27,22 +26,19 @@ componentDidMount() {
   this.fetchQuizzes();
 }
 
-  // {this.props.quizzes.map(quiz => {
-  //   return (
-  //     <div>
-  //       <h2>{quiz.title}</h2>
-  //       <Question
-  //         questions={quiz.questions} />
-  //     </div>
-  //   )}
-  // )}
-
-
   render() {
     return (
       <div>
-        <Question
-          quizzes={this.state.quizzes} />
+        <h1>{this.state.quizzes.title}</h1>
+          {this.state.quizzes.questions ?
+            this.state.quizzes.questions.map(question => {
+            return (
+              <Question
+                question={question}
+              />
+            )
+          }) : <h3>Loading..</h3>
+        }
       </div>
     );
   }
