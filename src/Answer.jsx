@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import Question from './Question.jsx';
-import Quiz from './Quiz.jsx';
 
-class Answer extends React.Component {
-
-
-    render() {
-      const { id, index, answer } = this.props;
-      return (
-        <h1>hello</h1>
-      );
-    }
+class Answers extends Component {
+  render() {
+    const { answer, index, id } = this.props;
+    return(
+      <div>
+          <input
+            key={index}
+            type="radio"
+            name={id}
+          />
+        {answer.title}
+      </div>
+    )
   }
+}
 
-module.exports = Answer;
+export default Answers;

@@ -10,39 +10,38 @@ class Quiz extends Component {
     }
   };
 
-fetchQuizzes() {
-  axios.get('/quizzes')
-  .then((response) => {
-    this.setState({
-      quizzes: response.data.quizzes
-    });
-  })
-  .catch(function(error) {
-    console.log('Error receiving quizzes')
-  })
-}
+  fetchQuizzes() {
+    axios.get('/quizzes')
+    .then((response) => {
+      this.setState({
+        quizzes: response.data.quizzes[0]
+      });
+    })
+    .catch(function(error) {
+      console.log('Error receiving quizzes')
+    })
+  }
 
-componentDidMount() {
-  this.fetchQuizzes();
-}
+  componentDidMount() {
+    this.fetchQuizzes();
+  }
 
   render() {
     return (
       <div>
         <h1>{this.state.quizzes.title}</h1>
-          {this.state.quizzes.questions ?
-            this.state.quizzes.questions.map(question => {
-            return (
-              <Question
-                question={question}
-              />
+
+        {this.state.quizzes.questions ?
+          this.state.quizzes.questions.map((question) => {
+            return(
+              <Question question={question} key={question.id} />
             )
-          }) : <h3>Loading..</h3>
-        }
+        }): <h2>Loading... </h2>}
+
+        <button type='submit'>Submit</button>
       </div>
     );
   }
-
-};
+}
 
 module.exports = Quiz;
