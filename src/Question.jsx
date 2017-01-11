@@ -14,6 +14,8 @@ class Question extends Component {
                 key={index}
                 id={question.id}
                 answer={answer}
+                score={question.score}
+                scoreAnswer={this.props.scoreAnswer}
               />
             )
           })}

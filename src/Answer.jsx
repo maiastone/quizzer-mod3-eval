@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 
 class Answers extends Component {
   render() {
-    
-    let score = 0;
+    const { answer, index, id, score, scoreAnswer } = this.props;
 
-    const { answer, index, id } = this.props;
+
     return(
       <label>
           <input
             key={index}
             type='radio'
             name={id}
-            onClick={this.scoreAnswer}
+            value={score}
+            onChange={() => this.props.scoreAnswer()}
           />
         {answer.title}
       </label>

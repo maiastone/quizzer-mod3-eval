@@ -7,6 +7,7 @@ class Quiz extends Component {
     super();
     this.state = {
       quizzes: [],
+      score: 0,
     }
   };
 
@@ -26,6 +27,13 @@ class Quiz extends Component {
     this.fetchQuizzes();
   }
 
+  scoreAnswer() {
+    debugger;
+    this.setState({
+      score: this.state.quizzes.questions.answers.score,
+    })
+
+  }
 
 
   render() {
@@ -36,7 +44,11 @@ class Quiz extends Component {
         {this.state.quizzes.questions ?
           this.state.quizzes.questions.map((question) => {
             return(
-              <Question question={question} key={question.id} />
+              <Question
+                question={question}
+                key={question.id}
+                scoreAnswer={() => this.scoreAnswer.bind(this)}
+              />
             )
         }): <h2>Loading... </h2>}
 
