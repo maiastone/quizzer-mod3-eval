@@ -5,9 +5,9 @@ class Question extends Component {
   render() {
     const { question } = this.props;
     return(
-      <section key={question.id}>
+      <main key={question.id}>
         <h2>{question.title}</h2>
-        <main>
+        <section>
           {question.answers.map((answer, index) => {
             return(
               <Answer
@@ -17,8 +17,8 @@ class Question extends Component {
               />
             )
           })}
-        </main>
-      </section>
+        </section>
+      </main>
     );
   }
 }

@@ -26,6 +26,8 @@ class Quiz extends Component {
     this.fetchQuizzes();
   }
 
+
+
   render() {
     return (
       <div>
