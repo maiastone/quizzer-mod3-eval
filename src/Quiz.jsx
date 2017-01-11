@@ -7,7 +7,7 @@ class Quiz extends Component {
     super();
     this.state = {
       quizzes: [],
-      score: 0,
+      score: [],
     }
   };
 
@@ -27,32 +27,42 @@ class Quiz extends Component {
     this.fetchQuizzes();
   }
 
-  scoreAnswer() {
-    debugger;
+  scoreAnswer(score, index) {
+    console.log(score, index)
+    this.state.score[index] = score;
     this.setState({
-      score: this.state.quizzes.questions.answers.score,
+      score: this.state.score,
     })
 
   }
 
+  totalScores(e) {
+    return this.state.score.reduce(function(accum, curr) {
+      return accum + curr;
+    }, 0)
+  }
 
   render() {
+    let score = this.totalScores();
     return (
       <div>
         <h1>{this.state.quizzes.title}</h1>
 
         {this.state.quizzes.questions ?
-          this.state.quizzes.questions.map((question) => {
+          this.state.quizzes.questions.map((question, index) => {
             return(
               <Question
                 question={question}
                 key={question.id}
-                scoreAnswer={() => this.scoreAnswer.bind(this)}
+                scoreAnswer={(score) => this.scoreAnswer(score, index)}
               />
             )
         }): <h2>Loading... </h2>}
-
-        <button type='submit'>Submit</button>
+        {score}
+        <button type='submit'
+          onClick={(e) => this.totalScores(e)}
+        >Submit
+        </button>
       </div>
     );
   }

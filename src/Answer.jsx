@@ -12,7 +12,7 @@ class Answers extends Component {
             type='radio'
             name={id}
             value={score}
-            onChange={() => this.props.scoreAnswer()}
+            onChange={() => this.props.scoreAnswer(score)}
           />
         {answer.title}
       </label>
