@@ -8,7 +8,8 @@ class Quiz extends Component {
     this.state = {
       quizzes: [],
       selectedAnswer: {},
-      selectedScore: ''
+      selectedScore: '',
+      answer: '',
     }
   };
 
@@ -24,24 +25,37 @@ class Quiz extends Component {
     })
   }
 
+  fetchScores(e) {
+    axios.post('/scores', {
+      score: this.state.selectedScore
+    })
+    .then((response) => {
+      this.setState ({
+        answer: response.data.score
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   componentDidMount() {
     this.fetchQuizzes();
   }
 
   scoreAnswer(score, index) {
-    let currentSelection = this.state.selectedAnswer;
-    currentSelection[index]= score;
+    let currentAnswerScore = this.state.selectedAnswer;
+    currentAnswerScore[index] = score;
     this.setState ({
-      selectedAnswer: currentSelection,
+      selectedAnswer: currentAnswerScore,
     })
-    this.totalScores(index)
-
+    this.totalScores(index);
   }
 
   totalScores(index) {
     const { selectedAnswer } = this.state;
     let sum = Object.keys(selectedAnswer).reduce((sum, index) => {
-      return sum + parseInt(selectedAnswer[index])
+      return sum + parseInt(selectedAnswer[index], 10)
     }, 0);
     this.setState ({
       selectedScore: sum,
@@ -65,8 +79,10 @@ class Quiz extends Component {
             )
         }): <h2>Loading... </h2>}
 
+        {this.state.selectedScore}
+        {this.state.answer}
         <button type='submit'
-          onClick={(e) => this.totalScores(e)}
+          onClick={(e) => this.fetchScores(e)}
         >Submit
         </button>
       </div>
