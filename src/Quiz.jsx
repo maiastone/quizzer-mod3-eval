@@ -7,7 +7,8 @@ class Quiz extends Component {
     super();
     this.state = {
       quizzes: [],
-      score: [],
+      selectedAnswer: {},
+      selectedScore: ''
     }
   };
 
@@ -28,22 +29,27 @@ class Quiz extends Component {
   }
 
   scoreAnswer(score, index) {
-    console.log(score, index)
-    this.state.score[index] = score;
-    this.setState({
-      score: this.state.score,
+    let currentSelection = this.state.selectedAnswer;
+    currentSelection[index]= score;
+    this.setState ({
+      selectedAnswer: currentSelection,
     })
+    this.totalScores(index)
 
   }
 
-  totalScores(e) {
-    return this.state.score.reduce(function(accum, curr) {
-      return accum + curr;
-    }, 0)
+  totalScores(index) {
+    const { selectedAnswer } = this.state;
+    let sum = Object.keys(selectedAnswer).reduce((sum, index) => {
+      return sum + parseInt(selectedAnswer[index])
+    }, 0);
+    this.setState ({
+      selectedScore: sum,
+    })
   }
 
   render() {
-    let score = this.totalScores();
+
     return (
       <div>
         <h1>{this.state.quizzes.title}</h1>
@@ -58,7 +64,7 @@ class Quiz extends Component {
               />
             )
         }): <h2>Loading... </h2>}
-        {score}
+
         <button type='submit'
           onClick={(e) => this.totalScores(e)}
         >Submit
