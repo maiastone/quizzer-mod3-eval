@@ -30,14 +30,14 @@ class Quiz extends Component {
       score: this.state.selectedScore
     })
     .then((response) => {
-      this.setState ({
-        answer: response.data.score
+      this.setState({
+        answer: response.data.score,
       });
     })
-    .catch((error) => {
+    .catch((error)=> {
       console.log(error);
     })
-  }
+  };
 
   componentDidMount() {
     this.fetchQuizzes();
@@ -47,20 +47,20 @@ class Quiz extends Component {
     let currentAnswerScore = this.state.selectedAnswer;
     currentAnswerScore[index] = score;
     this.setState ({
-      selectedAnswer: currentAnswerScore,
-    })
+      selectedScore: score,
+    });
     this.totalScores(index);
-  }
+  };
 
   totalScores(index) {
     const { selectedAnswer } = this.state;
-    let sum = Object.keys(selectedAnswer).reduce((sum, index) => {
-      return sum + parseInt(selectedAnswer[index], 10)
+    let total = Object.keys(selectedAnswer).reduce((sum, index) => {
+      return sum + (selectedAnswer[index])
     }, 0);
-    this.setState ({
-      selectedScore: sum,
-    })
-  }
+    this.setState({
+      selectedScore: total
+    });
+  };
 
   render() {
 
